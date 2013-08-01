@@ -1,0 +1,5 @@
+<layers>
+    <layer name="vnccollab.common"
+           interface="vnccollab.common.interfaces.IAddOnInstalled"
+           />
+</layers>

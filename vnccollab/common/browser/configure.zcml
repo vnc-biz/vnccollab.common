@@ -1,0 +1,22 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    i18n_domain="vnccollab.common">
+
+  <!-- Resource directories -->
+  <browser:resourceDirectory
+      name="vnccollab.common.images"
+      directory="images"
+      />
+
+  <browser:resourceDirectory
+      name="vnccollab.common.js"
+      directory="js"
+      />
+
+  <browser:resourceDirectory
+      name="vnccollab.common.stylesheets"
+      directory="stylesheets"
+      />
+
+</configure>
