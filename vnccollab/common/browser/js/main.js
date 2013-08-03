@@ -1,5 +1,6 @@
 // module definition
 var vnc_collab_common = (function () {
+
   // Private components
   function initDeferredPortlets() {
 
@@ -33,7 +34,6 @@ var vnc_collab_common = (function () {
         if ($data.hasClass('portlet-deferred')) {
           $data.find('.portletBody').slimScroll({'height': '240px'});
           $elem.replaceWith($data);
-          attachPortletButtons();
         } else {
           $elem.find('.portletBodyWrapper').empty();
         }
@@ -58,9 +58,10 @@ var vnc_collab_common = (function () {
     deferredPortlets.each(deferredRender);
   }
 
+
   // public interface
   return {
-        initDeferredPortlets: initDeferredPortlets
+        initDeferredPortlets: initDeferredPortlets,
   };
 }) ();
 
