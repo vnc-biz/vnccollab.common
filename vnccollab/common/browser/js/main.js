@@ -9,8 +9,9 @@ var vnc_collab_common = (function () {
       var manager = $elem.attr('portlet-manager');
       var name    = $elem.attr('portlet-name');
       var key     = $elem.attr('portlet-key');
+      var id      = $elem.parent().attr('id');
 
-      if (!manager || ! name || !key) {
+      if (!manager || ! name || !key || !id) {
         return '';
       }
 
@@ -19,7 +20,8 @@ var vnc_collab_common = (function () {
         'data': {
           'manager': manager,
           'name': name,
-          'key': key
+          'key': key,
+          'id': id
         }
       });
     }
@@ -41,10 +43,10 @@ var vnc_collab_common = (function () {
       return fn;
     }
 
-    function deferredRender(elem) {
+    function deferredRender() {
       // Starts the deferred render of the portlet,
       // if it has enough info
-      var urlInfo = deferredUrlInfo(elem);
+      var urlInfo = deferredUrlInfo(this);
       if (!urlInfo) {
         return;
       }
@@ -52,19 +54,15 @@ var vnc_collab_common = (function () {
       var url = urlInfo.url;
       var data = urlInfo.data;
 
-      // Return promise from ajax call
-      return jq.get(url, data, updatePortlet(elem));
+      // Trigger DeferredPorletLoaded event if promise is complete
+      jq.get(url, data, updatePortlet(this)).then(function(){
+        jq('body').trigger( "DeferredPorletLoaded", data);
+      });
     }
 
-    var deferredPortlets = jq('.portlet-deferred').map(function(i, elem) {
-      return deferredRender(elem);
-    });
+    var deferredPortlets = jq('.portlet-deferred');
+    deferredPortlets.each(deferredRender);
 
-    // When all promises are complete
-    jq.when.apply(jq, deferredPortlets ).then(function(){
-      // Exec attachPortletButtons from core js.
-      attachPortletButtons();
-    });
   }
 
   // public interface

@@ -4,7 +4,10 @@ Changelog
 1.0 (unreleased)
 ----------------
 
+- Adds custom event for portlet loading complete.
+  [Cesar Gonzalez]
+
 - Attach portlet buttons when deferred porlets are complete
- [Cesar Gonzalez]
+  [Cesar Gonzalez]
 
 - Initial release.
