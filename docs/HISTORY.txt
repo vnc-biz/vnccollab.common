@@ -4,4 +4,7 @@ Changelog
 1.0 (unreleased)
 ----------------
 
+- Attach portlet buttons when deferred porlets are complete
+ [Cesar Gonzalez]
+
 - Initial release.

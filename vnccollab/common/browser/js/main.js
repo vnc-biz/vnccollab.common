@@ -41,23 +41,31 @@ var vnc_collab_common = (function () {
       return fn;
     }
 
-    function deferredRender() {
+    function deferredRender(elem) {
       // Starts the deferred render of the portlet,
       // if it has enough info
-      var urlInfo = deferredUrlInfo(this);
+      var urlInfo = deferredUrlInfo(elem);
       if (!urlInfo) {
         return;
       }
 
       var url = urlInfo.url;
       var data = urlInfo.data;
-      jq.get(url, data, updatePortlet(this));
+
+      // Return promise from ajax call
+      return jq.get(url, data, updatePortlet(elem));
     }
 
-    var deferredPortlets = jq('.portlet-deferred');
-    deferredPortlets.each(deferredRender);
-  }
+    var deferredPortlets = jq('.portlet-deferred').map(function(i, elem) {
+      return deferredRender(elem);
+    });
 
+    // When all promises are complete
+    jq.when.apply(jq, deferredPortlets ).then(function(){
+      // Exec attachPortletButtons from core js.
+      attachPortletButtons();
+    });
+  }
 
   // public interface
   return {
