@@ -4,6 +4,9 @@ Changelog
 1.0 (unreleased)
 ----------------
 
+- Adds search keywords.
+  [Jose Dinuncio]
+
 - Adds custom event for portlet loading complete.
   [Cesar Gonzalez]
 
