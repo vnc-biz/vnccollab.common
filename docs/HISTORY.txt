@@ -4,6 +4,9 @@ Changelog
 1.0 (unreleased)
 ----------------
 
+- Add jquery selection field js plugin.
+  [Vitaliy Podoba]
+
 - Adds search keywords.
   [Jose Dinuncio]
 
