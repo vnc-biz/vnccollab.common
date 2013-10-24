@@ -1,12 +1,12 @@
 from setuptools import setup, find_packages
 import os
 
-version = '1.0'
+version = '1.0.0'
 
 long_description = (
     open('docs/README.txt').read()
     + '\n' +
-    open('HISTORY.txt').read()
+    open('docs/HISTORY.txt').read()
     + '\n')
 
 setup(name='vnccollab.common',
@@ -24,8 +24,8 @@ setup(name='vnccollab.common',
         "Topic :: Software Development :: Libraries :: Python Modules",
         ],
       keywords='',
-      author='',
-      author_email='',
+      author='Jose Dinuncio',
+      author_email='jose.dinuncio@vnc.biz',
       url='http://svn.plone.org/svn/collective/',
       license='gpl',
       packages=find_packages(exclude=['ez_setup']),
@@ -34,6 +34,8 @@ setup(name='vnccollab.common',
       zip_safe=False,
       install_requires=[
           'setuptools',
+          'plone.app.jquery',
+          'collective.js.jqueryui',
       ],
       extras_require={'test': ['plone.app.testing']},
       entry_points="""

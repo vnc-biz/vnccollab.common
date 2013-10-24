@@ -1,5 +1,6 @@
 // module definition
 var vnc_collab_common = (function () {
+
   // Private components
   function initDeferredPortlets() {
 
@@ -8,8 +9,9 @@ var vnc_collab_common = (function () {
       var manager = $elem.attr('portlet-manager');
       var name    = $elem.attr('portlet-name');
       var key     = $elem.attr('portlet-key');
+      var id      = $elem.parent().attr('id');
 
-      if (!manager || ! name || !key) {
+      if (!manager || ! name || !key || !id) {
         return '';
       }
 
@@ -18,7 +20,8 @@ var vnc_collab_common = (function () {
         'data': {
           'manager': manager,
           'name': name,
-          'key': key
+          'key': key,
+          'id': id
         }
       });
     }
@@ -33,7 +36,6 @@ var vnc_collab_common = (function () {
         if ($data.hasClass('portlet-deferred')) {
           $data.find('.portletBody').slimScroll({'height': '240px'});
           $elem.replaceWith($data);
-          attachPortletButtons();
         } else {
           $elem.find('.portletBodyWrapper').empty();
         }
@@ -51,16 +53,21 @@ var vnc_collab_common = (function () {
 
       var url = urlInfo.url;
       var data = urlInfo.data;
-      jq.get(url, data, updatePortlet(this));
+
+      // Trigger DeferredPorletLoaded event if promise is complete
+      jq.get(url, data, updatePortlet(this)).then(function(){
+        jq('body').trigger( "DeferredPorletLoaded", data);
+      });
     }
 
     var deferredPortlets = jq('.portlet-deferred');
     deferredPortlets.each(deferredRender);
+
   }
 
   // public interface
   return {
-        initDeferredPortlets: initDeferredPortlets
+        initDeferredPortlets: initDeferredPortlets,
   };
 }) ();
 

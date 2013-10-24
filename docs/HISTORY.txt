@@ -1,7 +1,19 @@
 Changelog
 =========
 
-1.0 (unreleased)
-----------------
+1.0.0 - October 24, 2013
+------------------------
+
+- Add jquery selection field js plugin.
+  [Vitaliy Podoba]
+
+- Adds search keywords.
+  [Jose Dinuncio]
+
+- Adds custom event for portlet loading complete.
+  [Cesar Gonzalez]
+
+- Attach portlet buttons when deferred porlets are complete
+  [Cesar Gonzalez]
 
 - Initial release.
