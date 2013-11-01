@@ -4,6 +4,9 @@ Changelog
 1.0.1 - Unreleased
 ------------------
 
+- Adds vocabualry utility.
+  [Jose DInuncio]
+
 - Add more js scripts for stream and casts.
   [Vitaliy Podoba]
 
