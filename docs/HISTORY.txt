@@ -4,6 +4,9 @@ Changelog
 1.0.1 - Unreleased
 ------------------
 
+- Adds dynatree jquery pluging. Upgrade step 1100.
+  [Cesar Gonzalez]
+
 - Adds vocabualry utility.
   [Jose DInuncio]
 

@@ -15,10 +15,9 @@
       />
 
   <browser:resourceDirectory
-      name="vnccollab.common.stylesheets"
-      directory="stylesheets"
+      name="vnccollab.common.css"
+      directory="css"
       />
-
 
   <!-- Views -->
   <browser:page

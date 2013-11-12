@@ -2,6 +2,8 @@
 <object name="portal_javascripts">
   <javascript id="++resource++vnccollab.common.js/slimScroll.js"
               enabled="True" />
+  <javascript id="++resource++vnccollab.common.js/jquery.dynatree.min.js"
+              enabled="True" />
   <javascript id="++resource++vnccollab.common.js/main.js"
               enabled="True" />
 </object>
