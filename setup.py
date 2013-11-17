@@ -35,6 +35,8 @@ setup(name='vnccollab.common',
       install_requires=[
           'setuptools',
           'plone.app.jquery',
+          'five.grok',
+          'plone.api',
           'collective.js.jqueryui',
       ],
       extras_require={'test': ['plone.app.testing']},
