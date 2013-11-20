@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 import os
 
-version = '1.0.0'
+version = '1.0.1'
 
 long_description = (
     open('docs/README.txt').read()
@@ -35,6 +35,8 @@ setup(name='vnccollab.common',
       install_requires=[
           'setuptools',
           'plone.app.jquery',
+          'five.grok',
+          'plone.api',
           'collective.js.jqueryui',
       ],
       extras_require={'test': ['plone.app.testing']},

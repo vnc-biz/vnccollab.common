@@ -1,6 +1,18 @@
 Changelog
 =========
 
+1.0.1 - November 20, 2013
+-------------------------
+
+- Adds dynatree jquery plugin. Upgrade step 1100.
+  [Cesar Gonzalez]
+
+- Adds vocabualry utility.
+  [Jose DInuncio]
+
+- Add more js scripts for stream and casts.
+  [Vitaliy Podoba]
+
 1.0.0 - October 24, 2013
 ------------------------
 
