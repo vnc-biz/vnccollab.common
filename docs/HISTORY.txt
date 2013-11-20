@@ -1,10 +1,10 @@
 Changelog
 =========
 
-1.0.1 - Unreleased
-------------------
+1.0.1 - November 20, 2013
+-------------------------
 
-- Adds dynatree jquery pluging. Upgrade step 1100.
+- Adds dynatree jquery plugin. Upgrade step 1100.
   [Cesar Gonzalez]
 
 - Adds vocabualry utility.
