@@ -15,4 +15,16 @@
           />
     </genericsetup:upgradeSteps>
 
+    <genericsetup:upgradeSteps
+      source="1100"
+      destination="1101"
+      sortkey="2"
+      profile="vnccollab.common:default">
+
+        <genericsetup:upgradeDepends
+          title="Adds main.css"
+          import_steps="cssregistry"
+          />
+    </genericsetup:upgradeSteps>
+
 </configure>
