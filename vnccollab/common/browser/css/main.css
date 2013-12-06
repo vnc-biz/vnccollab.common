@@ -1,0 +1,26 @@
+/* Dynatree CSS */
+ul.dynatree-container li {
+  background-image: url(++resource++vnccollab.common.images/dynatree/vline.gif);
+}
+span.dynatree-empty,
+span.dynatree-vline,
+span.dynatree-connector,
+span.dynatree-expander,
+span.dynatree-icon,
+span.dynatree-checkbox,
+span.dynatree-radio,
+span.dynatree-drag-helper-img,
+#dynatree-drop-marker {
+  background-image: url(++resource++vnccollab.common.images/dynatree/icons.gif);
+}
+.dynatree-statusnode-wait span.dynatree-icon,
+.dynatree-loading span.dynatree-expander {
+  background-image: url(++resource++vnccollab.common.images/dynatree/loading.gif);
+}
+.dynatree-title {
+  margin-left: 4px;
+}
+span.dynatree-node {
+  display: block;
+  cursor: pointer;
+}
