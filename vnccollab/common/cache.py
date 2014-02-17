@@ -22,7 +22,6 @@ class TimeCacheKey:
             self.last_time[nargs] = now
             last_time = now
 
-        print nargs, self.last_time
         return nargs, last_time
 
     def _kargs_to_list(self, kargs):
