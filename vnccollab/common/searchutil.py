@@ -1,4 +1,12 @@
 from plone import api
+from plone.memoize import ram
+
+from vnccollab.common.cache import TimeCacheKey
+
+CACHE_TIME = 15 * 60  # 15 minutes
+
+
+cache = TimeCacheKey(CACHE_TIME)
 
 
 SEARCH_KEYS = ['user', 'type']
@@ -37,6 +45,7 @@ def _types_from_type_string(type_string):
     return types
 
 
+@ram.cache(cache)
 def _user_ids_from_users_string(user_string):
     '''Returns a list of plone user ids given a string with
     a list of parts of names, surnames or mails.'''

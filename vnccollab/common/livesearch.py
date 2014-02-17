@@ -1,4 +1,14 @@
+from plone import api
+from plone.memoize import ram
+
+from vnccollab.common.cache import TimeCacheKey
 from vnccollab.common import searchutil
+
+
+CACHE_TIME = 15 * 60  # 15 minutes
+
+
+cache = TimeCacheKey(CACHE_TIME)
 
 
 def get_query(searchable_text, query):
@@ -20,3 +30,16 @@ def get_query(searchable_text, query):
         del(query['SearchableText'])
 
     return query
+
+
+def query(SearchableText, params):
+    params = get_query(SearchableText, params)
+    result = _query(SearchableText, **params)
+    return result
+
+
+@ram.cache(cache)
+def _query(SearchableText, **params):
+    catalog = api.portal.get_tool(name='portal_catalog')
+    result = catalog(**params)
+    return result
