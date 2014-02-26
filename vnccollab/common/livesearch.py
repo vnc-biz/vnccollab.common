@@ -11,7 +11,8 @@ CACHE_TIME = 15 * 60  # 15 minutes
 cache = TimeCacheKey(CACHE_TIME)
 
 
-def get_query(searchable_text, query):
+def get_query(query):
+    searchable_text = query.get('SearchableText', '')
     key, val = searchutil._key_and_val_from_searchable_text(searchable_text)
     if key is None or key not in searchutil.SEARCH_KEYS:
         return query
@@ -32,14 +33,15 @@ def get_query(searchable_text, query):
     return query
 
 
-def query(SearchableText, params):
-    params = get_query(SearchableText, params)
-    result = _query(SearchableText, **params)
+def query(params):
+    params = get_query(params)
+    result = _query(**params)
     return result
 
 
 @ram.cache(cache)
-def _query(SearchableText, **params):
+def _query(**params):
     catalog = api.portal.get_tool(name='portal_catalog')
     result = catalog(**params)
     return result
+

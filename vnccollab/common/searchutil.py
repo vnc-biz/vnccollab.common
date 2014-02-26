@@ -33,6 +33,7 @@ def _key_and_val_from_searchable_text(searchable_text):
     parts = searchable_text.split(':')
     key = parts[0].strip()
     val = parts[1].strip()
+    val = val.replace('*', '')
     return key, val
 
 
@@ -61,10 +62,10 @@ def _user_ids_from_users_string(user_string):
 def _user_ids_from_string(str):
     '''Returns a list of plone user ids given a string with
     part of a name, surname or mail.'''
-    mdata = api.portal.get_tool(name='portal_memberdata')
-    info = mdata.searchMemberData('fullname', str)
-    info = info + mdata.searchMemberData('email', str)
-    user_ids = [x.get('username', '') for x in info]
+    users = api.user.get_users()
+    user_ids = [x.getProperty('id') for x in users
+                if str in x.getProperty('fullname')
+                or str in x.getProperty('email')]
     return user_ids
 
 
