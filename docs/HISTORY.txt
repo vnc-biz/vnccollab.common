@@ -4,6 +4,9 @@ Changelog
 1.0.3 - Unreleased
 -------------------------
 
+- Fixes tests.
+  [Jose Dinuncio]
+
 - Adds version.txt.
   [Jose Dinuncio]
 
