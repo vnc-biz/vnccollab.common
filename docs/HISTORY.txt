@@ -7,6 +7,9 @@ Changelog
 - Fixes tests.
   [Jose Dinuncio]
 
+- Improves speed in user search [10169].
+  [Jose Dinuncio].
+
 - Adds version.txt.
   [Jose Dinuncio]
 
