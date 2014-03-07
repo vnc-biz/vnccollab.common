@@ -1,11 +1,13 @@
 import unittest2 as unittest
 
-from plone import api
+from zope.publisher.browser import TestRequest
 
+from plone import api
 from plone.app.testing import setRoles
 from plone.app.testing import login
 from plone.app.testing import TEST_USER_ID, TEST_USER_NAME
 
+from vnccollab.common.browser.search import Search
 from vnccollab.common.testing import VNCCOLLAB_COMMON_INTEGRATION_TESTING
 
 
@@ -54,42 +56,11 @@ class TestSearchKeywords(unittest.TestCase):
 
     def test_search_one_user(self):
         """Only return entries of one especific user."""
-        search = self.portal.restrictedTraverse('@@search')
-        query = dict(SearchableText='user: ' + self.USER1_ID)
-        results = search.results(query=query)
-        results = [x for x in search.results(query=query)]
+        request = TestRequest(form=dict(SearchableText='user: '
+                                        + self.USER1_ID))
+        view = Search(self.portal, request)
+        results = view.results()
+        results = [x for x in results]
 
-        # only two entries created by the default user
-        assert (len(results) == 2)
-
-        # Only one different user in this search
-        #creators = set([x.creator['uid'] for x in entries])
-        #assert (len(creators) == 1)
-        #assert self.USER1_MAIL in creators
-'''
-    def test_search_inexistent_user(self):
-        """Search for inexisten user."""
-        search = self.folder.restrictedTraverse('@@search')
-        search.searchable_text = 'user: InexistentUser'
-        item_info = search.getItemInfo()
-
-        # No entries
-        entries = item_info['entries']
-        assert (len(entries) == 0)
-
-    def test_search_several_user(self):
-        """Return entries of several user."""
-        search = self.folder.restrictedTraverse('@@search')
-        search.searchable_text = 'user: {0} {1}'.format(
-            self.USER1_ID, self.USER2_ID)
-        item_info = search.getItemInfo()
-
-        entries = item_info['entries']
-        assert (len(entries) == 3)
-
-        # Two different user in this search
-        creators = set([x.creator['uid'] for x in entries])
-        assert (len(creators) == 2)
-        assert self.USER1_MAIL in creators
-        assert self.USER2_MAIL in creators
-'''
+        # only three results created by the default user, plus the folder
+        assert (len(results) == 3)

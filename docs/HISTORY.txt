@@ -1,6 +1,24 @@
 Changelog
 =========
 
+1.0.3 - March 07, 2014
+----------------------
+
+- Fixes tests.
+  [Jose Dinuncio]
+
+- Improves speed in user search [10169].
+  [Jose Dinuncio].
+
+- Adds version.txt.
+  [Jose Dinuncio]
+
+1.0.2 - December 06, 2013
+-------------------------
+
+- Adds lost hotfix.
+  [Jose Dinuncio]
+
 1.0.1 - November 20, 2013
 -------------------------
 
