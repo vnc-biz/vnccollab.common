@@ -1,6 +1,12 @@
 Changelog
 =========
 
+1.0.4 - Unreleased
+------------------
+
+- Adds README documentation.
+  [Jose Dinuncio]
+
 1.0.3 - March 07, 2014
 ----------------------
 
