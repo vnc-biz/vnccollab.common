@@ -1,0 +1,72 @@
+
+    <html>
+      <head><title>Test coverage for vnccollab.common.livesearch</title>
+      <style type="text/css">
+        a {text-decoration: none; display: block; padding-right: 1em;}
+        a:hover {background: #EFA;}
+        hr {height: 1px; border: none; border-top: 1px solid gray;}
+        .notcovered {background: #FCC;}
+        .footer {margin: 2em; font-size: small; color: gray;}
+      </style>
+      </head>
+      <body><h1>Test coverage for vnccollab.common.livesearch</h1>
+      <table>
+    
+<tr><td><a href="vnccollab.html">vnccollab/</a></td> <td style="background: yellow">&nbsp;&nbsp;&nbsp;&nbsp;</td> <td>covered 95% (12 of 287 uncovered)</td></tr>
+<tr><td><a href="vnccollab.common.html">&nbsp;&nbsp;&nbsp;&nbsp;common/</a></td> <td style="background: yellow">&nbsp;&nbsp;&nbsp;&nbsp;</td> <td>covered 95% (12 of 287 uncovered)</td></tr>
+<tr><td><a href="vnccollab.common.livesearch.html">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;livesearch.py</a></td> <td style="background: green">&nbsp;&nbsp;&nbsp;&nbsp;</td> <td>covered 100% (0 of 30 uncovered)</td></tr>
+</table><hr/>
+<pre>    1: from plone import api
+    1: from plone.memoize import ram
+       
+    1: from vnccollab.common.cache import TimeCacheKey
+    1: from vnccollab.common import searchutil
+       
+       
+    1: CACHE_TIME = 15 * 60  # 15 minutes
+       
+       
+    1: cache = TimeCacheKey(CACHE_TIME)
+       
+       
+    1: def get_query(query):
+    3:     searchable_text = query.get('SearchableText', '')
+    3:     key, val = searchutil._key_and_val_from_searchable_text(searchable_text)
+    3:     if key is None or key not in searchutil.SEARCH_KEYS:
+    1:         return query
+       
+    2:     portal_type = query.get('portal_type', [])
+       
+    2:     if key == 'type':
+    1:         types = searchutil._types_from_type_string(val)
+   10:         portal_type = [x for x in portal_type if x in types]
+    1:         query['portal_type'] = portal_type
+    1:         del(query['SearchableText'])
+       
+    1:     elif key == 'user':
+    1:         user_ids = searchutil._user_ids_from_users_string(val)
+    1:         query['Creator'] = user_ids
+    1:         del(query['SearchableText'])
+       
+    2:     return query
+       
+       
+    1: def query(params):
+    3:     params = get_query(params)
+    3:     result = _query(**params)
+    3:     return result
+       
+       
+    1: @ram.cache(cache)
+       def _query(**params):
+    3:     catalog = api.portal.get_tool(name='portal_catalog')
+    3:     result = catalog(**params)
+    3:     return result
+       
+</pre>
+
+      <div class="footer">
+      Generated for revision Niewersjonowany katalog on 2014-03-19 18:17:18.052111Z
+      </div>
+    </body>
+    </html>

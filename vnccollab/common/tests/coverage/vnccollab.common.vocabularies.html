@@ -1,0 +1,40 @@
+
+    <html>
+      <head><title>Test coverage for vnccollab.common.vocabularies</title>
+      <style type="text/css">
+        a {text-decoration: none; display: block; padding-right: 1em;}
+        a:hover {background: #EFA;}
+        hr {height: 1px; border: none; border-top: 1px solid gray;}
+        .notcovered {background: #FCC;}
+        .footer {margin: 2em; font-size: small; color: gray;}
+      </style>
+      </head>
+      <body><h1>Test coverage for vnccollab.common.vocabularies</h1>
+      <table>
+    
+<tr><td><a href="vnccollab.html">vnccollab/</a></td> <td style="background: yellow">&nbsp;&nbsp;&nbsp;&nbsp;</td> <td>covered 95% (12 of 287 uncovered)</td></tr>
+<tr><td><a href="vnccollab.common.html">&nbsp;&nbsp;&nbsp;&nbsp;common/</a></td> <td style="background: yellow">&nbsp;&nbsp;&nbsp;&nbsp;</td> <td>covered 95% (12 of 287 uncovered)</td></tr>
+<tr><td><a href="vnccollab.common.vocabularies.html">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;vocabularies.py</a></td> <td style="background: green">&nbsp;&nbsp;&nbsp;&nbsp;</td> <td>covered 100% (0 of 11 uncovered)</td></tr>
+</table><hr/>
+<pre>    1: from zope.interface import implements
+    1: from zope.schema.interfaces import IVocabularyFactory
+    1: from zope.schema.vocabulary import SimpleTerm, SimpleVocabulary
+       
+       
+    2: class SimpleVocabularyFactory:
+    1:     implements(IVocabularyFactory)
+       
+    1:     def __init__(self, lst):
+    1:         self.lst = lst
+       
+    1:     def __call__(self, context):
+    3:         terms = [SimpleTerm(value=x[0], token=x[0], title=x[1]) for x in self.lst]
+    1:         vocabulary = SimpleVocabulary(terms)
+    1:         return vocabulary
+</pre>
+
+      <div class="footer">
+      Generated for revision Niewersjonowany katalog on 2014-03-19 18:17:18.052111Z
+      </div>
+    </body>
+    </html>

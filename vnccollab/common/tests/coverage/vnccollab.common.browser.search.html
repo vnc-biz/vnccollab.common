@@ -1,0 +1,123 @@
+
+    <html>
+      <head><title>Test coverage for vnccollab.common.browser.search</title>
+      <style type="text/css">
+        a {text-decoration: none; display: block; padding-right: 1em;}
+        a:hover {background: #EFA;}
+        hr {height: 1px; border: none; border-top: 1px solid gray;}
+        .notcovered {background: #FCC;}
+        .footer {margin: 2em; font-size: small; color: gray;}
+      </style>
+      </head>
+      <body><h1>Test coverage for vnccollab.common.browser.search</h1>
+      <table>
+    
+<tr><td><a href="vnccollab.html">vnccollab/</a></td> <td style="background: yellow">&nbsp;&nbsp;&nbsp;&nbsp;</td> <td>covered 95% (12 of 287 uncovered)</td></tr>
+<tr><td><a href="vnccollab.common.html">&nbsp;&nbsp;&nbsp;&nbsp;common/</a></td> <td style="background: yellow">&nbsp;&nbsp;&nbsp;&nbsp;</td> <td>covered 95% (12 of 287 uncovered)</td></tr>
+<tr><td><a href="vnccollab.common.browser.html">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;browser/</a></td> <td style="background: yellow">&nbsp;&nbsp;&nbsp;&nbsp;</td> <td>covered 90% (11 of 119 uncovered)</td></tr>
+<tr><td><a href="vnccollab.common.browser.search.html">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;search.py</a></td> <td style="background: yellow">&nbsp;&nbsp;&nbsp;&nbsp;</td> <td>covered 91% (6 of 68 uncovered)</td></tr>
+</table><hr/>
+<pre>    1: from plone import api
+    1: from plone.app.search.browser import Search as OriginalSearch
+    1: from plone.app.contentlisting.interfaces import IContentListing
+    1: from Products.ZCTextIndex.ParseTree import ParseError
+    1: from Products.CMFPlone.PloneBatch import Batch
+       
+    1: from vnccollab.common import searchutil
+       
+       
+    2: class Search(OriginalSearch):
+    1:     '''Search extension to allow keyword searchs'''
+       
+    1:     def results(self, query=None, batch=True, b_size=10, b_start=0,
+    1:                 allowed_keys=None):
+               ''' Get properly wrapped search results from the catalog.
+               Everything in Plone that performs searches should go through this
+               view.
+               'query' should be a dictionary of catalog parameters.
+               '''
+    2:         searchable_text = self.get_searchable_text(query)
+    2:         if searchutil._is_keyword_search(searchable_text, allowed_keys):
+    2:             results = self.keyword_results(query, batch, b_size, b_start)
+    2:             return results
+       
+               else:
+<div class="notcovered">&gt;&gt;&gt;&gt;&gt;&gt;             return OriginalSearch.results(self, query, batch, b_size, b_start)</div>       
+    1:     def get_searchable_text(self, query=None):
+               '''Returns the searchable text for the query.'''
+    4:         if query is None:
+    4:             query = {}
+    4:         request = self.request
+    4:         text = query.get('SearchableText', '')
+    4:         if not text:
+    4:             text = request.form.get('SearchableText', '')
+    4:         if not text:
+                   # Without text, the only meaningful case is Subject
+<div class="notcovered">&gt;&gt;&gt;&gt;&gt;&gt;             text = request.form.get('Subject', '')</div>    4:         return text
+       
+    1:     def keyword_results(self, query=None, batch=True, b_size=10, b_start=0):
+               '''Returns the result of a keywor query.
+               The current accepted keywords are:
+                   user: An ORed list of words that should appear in the user info.
+                   type: An ORed list of content types.
+               '''
+    2:         searchable_text = self.get_searchable_text(query)
+    2:         key, val = searchutil._key_and_val_from_searchable_text(searchable_text)
+    2:         if key == 'type':
+    1:             return self.type_results(query, batch, b_size, b_start, val)
+    1:         elif key == 'user':
+    1:             return self.user_results(query, batch, b_size, b_start, val)
+               else:
+<div class="notcovered">&gt;&gt;&gt;&gt;&gt;&gt;             return []</div>       
+    1:     def type_results(self, query=None, batch=True, b_size=10, b_start=0, type_string=''):
+               '''Returns the result of a search for the given content types.
+               '''
+    1:         query = self._prepare_query(query, batch, b_size, b_start)
+    1:         types = searchutil._types_from_type_string(type_string)
+   10:         portal_type = [x for x in query.get('portal_type', []) if x in types]
+    1:         query['portal_type'] = portal_type
+    1:         del(query['SearchableText'])
+    1:         results = self._result_from_query(query, batch, b_size, b_start)
+    1:         return results
+       
+    1:     def user_results(self, query=None, batch=True, b_size=10, b_start=0, users_string=''):
+               '''Returns the result of a search for the user which info coincides with args.
+               '''
+    1:         query = self._prepare_query(query, batch, b_size, b_start)
+    1:         user_ids = searchutil._user_ids_from_users_string(users_string)
+    1:         query['Creator'] = user_ids
+    1:         del(query['SearchableText'])
+    1:         results = self._result_from_query(query, batch, b_size, b_start)
+    1:         return results
+       
+    1:     def _prepare_query(self, query=None, batch=True, b_size=10, b_start=0):
+               '''Converts the query in a dict, obtaining info from the request, if not
+               directly available.'''
+    2:         if query is None:
+    2:             query = {}
+    2:         if batch:
+    2:             query['b_start'] = b_start = int(b_start)
+    2:             query['b_size'] = b_size
+    2:         query = self.filter_query(query)
+    2:         return query
+       
+    1:     def _result_from_query(self, query=None, batch=True, b_size=10, b_start=0):
+               '''Given a query (as dict or None) returns its result.'''
+    2:         if query is None:
+<div class="notcovered">&gt;&gt;&gt;&gt;&gt;&gt;             results = []</div>       
+               else:
+    2:             catalog = api.portal.get_tool(name='portal_catalog')
+    2:             try:
+    2:                 results = catalog(**query)
+<div class="notcovered">&gt;&gt;&gt;&gt;&gt;&gt;             except ParseError:</div><div class="notcovered">&gt;&gt;&gt;&gt;&gt;&gt;                 return []</div>       
+    2:         results = IContentListing(results)
+    2:         if batch:
+    2:             results = Batch(results, b_size, b_start)
+    2:         return results
+</pre>
+
+      <div class="footer">
+      Generated for revision Niewersjonowany katalog on 2014-03-19 18:17:18.052111Z
+      </div>
+    </body>
+    </html>
