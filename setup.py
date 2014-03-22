@@ -4,9 +4,9 @@ import os
 version = open('version.txt').read()
 
 long_description = (
-    open('docs/README.txt').read()
+    open(os.path.join("docs", "README.txt")).read()
     + '\n' +
-    open('docs/HISTORY.txt').read()
+    open(os.path.join("docs", "HISTORY.txt")).read()
     + '\n')
 
 setup(name='vnccollab.common',
