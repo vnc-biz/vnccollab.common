@@ -1,0 +1,105 @@
+
+    <html>
+      <head><title>Test coverage for vnccollab.common.searchutil</title>
+      <style type="text/css">
+        a {text-decoration: none; display: block; padding-right: 1em;}
+        a:hover {background: #EFA;}
+        hr {height: 1px; border: none; border-top: 1px solid gray;}
+        .notcovered {background: #FCC;}
+        .footer {margin: 2em; font-size: small; color: gray;}
+      </style>
+      </head>
+      <body><h1>Test coverage for vnccollab.common.searchutil</h1>
+      <table>
+    
+<tr><td><a href="vnccollab.html">vnccollab/</a></td> <td style="background: yellow">&nbsp;&nbsp;&nbsp;&nbsp;</td> <td>covered 95% (12 of 287 uncovered)</td></tr>
+<tr><td><a href="vnccollab.common.html">&nbsp;&nbsp;&nbsp;&nbsp;common/</a></td> <td style="background: yellow">&nbsp;&nbsp;&nbsp;&nbsp;</td> <td>covered 95% (12 of 287 uncovered)</td></tr>
+<tr><td><a href="vnccollab.common.searchutil.html">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;searchutil.py</a></td> <td style="background: yellow">&nbsp;&nbsp;&nbsp;&nbsp;</td> <td>covered 97% (1 of 49 uncovered)</td></tr>
+</table><hr/>
+<pre>    1: from plone import api
+    1: from plone.memoize import ram
+       
+    1: from vnccollab.common.cache import TimeCacheKey
+       
+    1: CACHE_TIME = 15 * 60  # 15 minutes
+       
+       
+    1: cache = TimeCacheKey(CACHE_TIME)
+       
+       
+    1: SEARCH_KEYS = ['user', 'type']
+       
+       
+    1: TYPES_NORM = {
+    1:     'news'   : ['News Item'],
+    1:     'image'  : ['Image'],
+    1:     'cast'   : ['Cast Update', 'Cast', 'Cast Comment', 'CastsContainer'],
+    1:     'topic'  : ['Cast Update', 'Cast', 'Cast Comment', 'CastsContainer'],
+    1:     'link'   : ['Link'],
+    1:     'file'   : ['File'],
+    1:     'folder' : ['Folder'],
+    1:     'document' : ['Document'],
+    1:     'event'  : ['Event'],
+       }
+       
+       
+    1: def _key_and_val_from_searchable_text(searchable_text):
+           '''Returns the key and arguments from a keyword query'''
+    5:     if ':' not in searchable_text:
+    1:         return None, None
+       
+    4:     parts = searchable_text.split(':')
+    4:     key = parts[0].strip()
+    4:     val = parts[1].strip()
+    4:     val = val.replace('*', '')
+    4:     return key, val
+       
+       
+    1: def _types_from_type_string(type_string):
+           '''Returns a list of plone types given a string with types.
+           The types in the string are more agreable to be typed by humans
+           (like 'news' instead of 'News Items').'''
+    2:     parts = type_string.lower().split()
+    6:     types = [x for part in parts for x in TYPES_NORM.get(part, [])]
+    2:     return types
+       
+       
+    1: @ram.cache(cache)
+       def _user_ids_from_users_string(user_string):
+           '''Returns a list of plone user ids given a string with
+           a list of parts of names, surnames or mails.'''
+    2:     user_ids = []
+    2:     parts = user_string.strip().split()
+    4:     for part in parts:
+    4:         for id in _user_ids_from_string(part):
+    2:             if id and id not in user_ids:
+    2:                 user_ids.append(id)
+    2:     return user_ids
+       
+       
+    1: def _user_ids_from_string(str):
+           '''Returns a list of plone user ids given a string with
+           part of a name, surname or mail.'''
+    2:     users = api.user.get_users()
+    2:     user_ids = [x.getProperty('id') for x in users
+    8:                 if str in x.getProperty('fullname')
+    8:                 or str in x.getProperty('email')]
+    2:     return user_ids
+       
+       
+    1: def _is_keyword_search(searchable_text, allowed_keys=None):
+           '''True if this search uses keywords.'''
+    2:     keys = SEARCH_KEYS
+       
+    2:     if allowed_keys is not None:
+<div class="notcovered">&gt;&gt;&gt;&gt;&gt;&gt;         keys = [k for k in keys if k in allowed_keys]</div>       
+    2:     text = ''.join(searchable_text.split())
+    5:     is_it = any((text.startswith(key + ':') for key in keys))
+    2:     return is_it
+</pre>
+
+      <div class="footer">
+      Generated for revision Niewersjonowany katalog on 2014-03-19 18:17:18.052111Z
+      </div>
+    </body>
+    </html>

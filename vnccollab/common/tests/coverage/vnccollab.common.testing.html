@@ -1,0 +1,67 @@
+
+    <html>
+      <head><title>Test coverage for vnccollab.common.testing</title>
+      <style type="text/css">
+        a {text-decoration: none; display: block; padding-right: 1em;}
+        a:hover {background: #EFA;}
+        hr {height: 1px; border: none; border-top: 1px solid gray;}
+        .notcovered {background: #FCC;}
+        .footer {margin: 2em; font-size: small; color: gray;}
+      </style>
+      </head>
+      <body><h1>Test coverage for vnccollab.common.testing</h1>
+      <table>
+    
+<tr><td><a href="vnccollab.html">vnccollab/</a></td> <td style="background: yellow">&nbsp;&nbsp;&nbsp;&nbsp;</td> <td>covered 95% (12 of 287 uncovered)</td></tr>
+<tr><td><a href="vnccollab.common.html">&nbsp;&nbsp;&nbsp;&nbsp;common/</a></td> <td style="background: yellow">&nbsp;&nbsp;&nbsp;&nbsp;</td> <td>covered 95% (12 of 287 uncovered)</td></tr>
+<tr><td><a href="vnccollab.common.testing.html">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;testing.py</a></td> <td style="background: green">&nbsp;&nbsp;&nbsp;&nbsp;</td> <td>covered 100% (0 of 29 uncovered)</td></tr>
+</table><hr/>
+<pre>    1: from plone.app.testing import PloneSandboxLayer
+    1: from plone.app.testing import applyProfile
+    1: from plone.app.testing import PLONE_FIXTURE
+    1: from plone.app.testing import IntegrationTesting
+    1: from plone.app.testing import FunctionalTesting
+       
+    1: from plone.testing import z2
+       
+    1: from zope.configuration import xmlconfig
+       
+       
+    2: class VnccollabcommonLayer(PloneSandboxLayer):
+       
+    1:     defaultBases = (PLONE_FIXTURE,)
+       
+    1:     def setUpZope(self, app, configurationContext):
+               # Load ZCML
+    1:         import collective.js.jqueryui
+    1:         xmlconfig.file(
+    1:             'configure.zcml',
+    1:             collective.js.jqueryui,
+    1:             context=configurationContext
+               )
+    1:         import vnccollab.common
+    1:         xmlconfig.file(
+    1:             'configure.zcml',
+    1:             vnccollab.common,
+    1:             context=configurationContext
+               )
+       
+    1:     def setUpPloneSite(self, portal):
+    1:         applyProfile(portal, 'vnccollab.common:default')
+       
+    1: VNCCOLLAB_COMMON_FIXTURE = VnccollabcommonLayer()
+    1: VNCCOLLAB_COMMON_INTEGRATION_TESTING = IntegrationTesting(
+    1:     bases=(VNCCOLLAB_COMMON_FIXTURE,),
+    1:     name="VnccollabcommonLayer:Integration"
+       )
+    1: VNCCOLLAB_COMMON_FUNCTIONAL_TESTING = FunctionalTesting(
+    1:     bases=(VNCCOLLAB_COMMON_FIXTURE, z2.ZSERVER_FIXTURE),
+    1:     name="VnccollabcommonLayer:Functional"
+       )
+</pre>
+
+      <div class="footer">
+      Generated for revision Niewersjonowany katalog on 2014-03-19 18:17:18.052111Z
+      </div>
+    </body>
+    </html>

@@ -1,0 +1,56 @@
+
+    <html>
+      <head><title>Test coverage for vnccollab.common.portlets.deferred</title>
+      <style type="text/css">
+        a {text-decoration: none; display: block; padding-right: 1em;}
+        a:hover {background: #EFA;}
+        hr {height: 1px; border: none; border-top: 1px solid gray;}
+        .notcovered {background: #FCC;}
+        .footer {margin: 2em; font-size: small; color: gray;}
+      </style>
+      </head>
+      <body><h1>Test coverage for vnccollab.common.portlets.deferred</h1>
+      <table>
+    
+<tr><td><a href="vnccollab.html">vnccollab/</a></td> <td style="background: yellow">&nbsp;&nbsp;&nbsp;&nbsp;</td> <td>covered 95% (12 of 287 uncovered)</td></tr>
+<tr><td><a href="vnccollab.common.html">&nbsp;&nbsp;&nbsp;&nbsp;common/</a></td> <td style="background: yellow">&nbsp;&nbsp;&nbsp;&nbsp;</td> <td>covered 95% (12 of 287 uncovered)</td></tr>
+<tr><td><a href="vnccollab.common.portlets.html">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;portlets/</a></td> <td style="background: green">&nbsp;&nbsp;&nbsp;&nbsp;</td> <td>covered 100% (0 of 20 uncovered)</td></tr>
+<tr><td><a href="vnccollab.common.portlets.deferred.html">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;deferred.py</a></td> <td style="background: green">&nbsp;&nbsp;&nbsp;&nbsp;</td> <td>covered 100% (0 of 20 uncovered)</td></tr>
+</table><hr/>
+<pre>    1: from plone.app.portlets.portlets import base
+       
+       
+    2: class DeferredRenderer(base.DeferredRenderer):
+           '''VNC own version of DeferredRenderer.
+    1:     '''
+       
+    1:     def update(self):
+    2:         self.initializing = True
+    2:         self.metadata = self.get_metadata()
+       
+    1:     def deferred_update(self):
+    2:         self.refresh()
+    1:         self.metadata = self.get_metadata()
+    1:         self.initializing = False
+       
+    1:     def refresh(self):
+    1:         raise NotImplemented("You must implement 'refresh' as a method")
+       
+    1:     def get_metadata(self):
+               # We don't always get the metadata
+    3:         if getattr(self, '__portlet_metadata__', False):
+    2:             metadata = self.__portlet_metadata__
+    2:             return dict(
+    2:                 manager=metadata['manager'],
+    2:                 name=metadata['name'],
+    2:                 key=metadata['key']
+                   )
+               else:
+    1:             return dict(manager='', name='', key='')
+</pre>
+
+      <div class="footer">
+      Generated for revision Niewersjonowany katalog on 2014-03-19 18:17:18.052111Z
+      </div>
+    </body>
+    </html>

@@ -44,7 +44,7 @@ class TestSearchKeywords(unittest.TestCase):
         self.portal.invokeFactory(id='folder', type_name='Folder')
         self.folder = self.portal['folder']
 
-        self.folder.invokeFactory('Document', 'doc')
+        self.folder.invokeFactory('Document', 'doc', title='doc1')
         self.folder.invokeFactory('Event', 'event')
 
         api.user.create(username=self.USER2_ID,
@@ -52,7 +52,7 @@ class TestSearchKeywords(unittest.TestCase):
                         password='secret',
                         roles=['Manager'])
         login(self.portal, self.USER2_MAIL)
-        self.folder.invokeFactory('Document', 'doc2')
+        self.folder.invokeFactory('Document', 'doc2', title='doc2')
 
     def test_search_one_user(self):
         """Only return entries of one especific user."""
@@ -64,3 +64,14 @@ class TestSearchKeywords(unittest.TestCase):
 
         # only three results created by the default user, plus the folder
         assert (len(results) == 3)
+
+    def test_search_type(self):
+        """Only return entries of especific type."""
+        request = TestRequest(form=dict(SearchableText='type:Document'))
+        view = Search(self.portal, request)
+        results = view.results()
+        results = [x for x in results]
+
+        self.assertTrue(len(results) == 2)
+        for r in results:
+            self.assertIn(r.Title(), ('doc1', 'doc2'))
