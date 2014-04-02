@@ -1,0 +1,85 @@
+
+    <html>
+      <head><title>Test coverage for vnccollab.common.browser.deferred</title>
+      <style type="text/css">
+        a {text-decoration: none; display: block; padding-right: 1em;}
+        a:hover {background: #EFA;}
+        hr {height: 1px; border: none; border-top: 1px solid gray;}
+        .notcovered {background: #FCC;}
+        .footer {margin: 2em; font-size: small; color: gray;}
+      </style>
+      </head>
+      <body><h1>Test coverage for vnccollab.common.browser.deferred</h1>
+      <table>
+    
+<tr><td><a href="vnccollab.html">vnccollab/</a></td> <td style="background: yellow">&nbsp;&nbsp;&nbsp;&nbsp;</td> <td>covered 95% (12 of 287 uncovered)</td></tr>
+<tr><td><a href="vnccollab.common.html">&nbsp;&nbsp;&nbsp;&nbsp;common/</a></td> <td style="background: yellow">&nbsp;&nbsp;&nbsp;&nbsp;</td> <td>covered 95% (12 of 287 uncovered)</td></tr>
+<tr><td><a href="vnccollab.common.browser.html">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;browser/</a></td> <td style="background: yellow">&nbsp;&nbsp;&nbsp;&nbsp;</td> <td>covered 90% (11 of 119 uncovered)</td></tr>
+<tr><td><a href="vnccollab.common.browser.deferred.html">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;deferred.py</a></td> <td style="background: yellow">&nbsp;&nbsp;&nbsp;&nbsp;</td> <td>covered 90% (5 of 51 uncovered)</td></tr>
+</table><hr/>
+<pre>    1: from zope.component import getUtility, getMultiAdapter
+    1: from Products.Five.browser import BrowserView
+       
+    1: from plone.portlets.interfaces import IPortletManager
+    1: from plone.portlets.interfaces import IPortletRetriever, IPortletRenderer
+       
+       
+    2: class PortletDeferredRendererHelperView(BrowserView):
+    1:     ''' '''
+    1:     def __call__(self):
+    5:         manager_name = self.request.get('manager', None)
+    5:         name = self.request.get('name', None)
+    5:         key = self.request.get('key', None)
+       
+    5:         if not manager_name or not name or not key:
+    1:             return ''
+       
+    4:         manager = self.get_manager(manager_name)
+    4:         if not manager:
+    1:             return ''
+       
+    3:         assignment = self.get_portlet_assignment(manager, name, key)
+    3:         if not assignment:
+    2:             return ''
+       
+    1:         renderer = self.get_portlet_renderer(manager, assignment)
+    1:         if not renderer:
+<div class="notcovered">&gt;&gt;&gt;&gt;&gt;&gt;             return ''</div>       
+    1:         try:
+    1:             renderer.deferred_update()
+<div class="notcovered">&gt;&gt;&gt;&gt;&gt;&gt;             return renderer.render()</div>    1:         except:
+    1:             return ''
+       
+    1:     def get_manager(self, manager_name):
+    5:         try:
+    5:             manager = getUtility(IPortletManager,
+    5:                                  name=manager_name,
+    5:                                  context=self.context)
+    4:             return manager
+    1:         except:
+    1:             return None
+       
+    1:     def get_portlet_assignment(self, manager, name, key):
+    4:         retriever = getMultiAdapter((self.context, manager,), IPortletRetriever)
+    4:         if not retriever:
+<div class="notcovered">&gt;&gt;&gt;&gt;&gt;&gt;             return None</div>       
+    8:         for assignment in retriever.getPortlets():
+    6:             if assignment['key'] == key and assignment['name'] == name:
+    2:                 return assignment['assignment']
+       
+    2:         return None
+       
+    1:     def get_portlet_renderer(self, manager, assignment):
+    2:         try:
+    2:             renderer = getMultiAdapter((self.context,
+    2:                                         self.request,
+    2:                                         self, manager,
+    2:                                         assignment), IPortletRenderer)
+    2:             return renderer
+<div class="notcovered">&gt;&gt;&gt;&gt;&gt;&gt;         except:</div><div class="notcovered">&gt;&gt;&gt;&gt;&gt;&gt;             return None</div></pre>
+
+      <div class="footer">
+      Generated for revision Niewersjonowany katalog on 2014-03-19 18:17:18.052111Z
+      </div>
+    </body>
+    </html>

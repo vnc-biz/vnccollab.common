@@ -1,0 +1,60 @@
+
+    <html>
+      <head><title>Test coverage for vnccollab.common.cache</title>
+      <style type="text/css">
+        a {text-decoration: none; display: block; padding-right: 1em;}
+        a:hover {background: #EFA;}
+        hr {height: 1px; border: none; border-top: 1px solid gray;}
+        .notcovered {background: #FCC;}
+        .footer {margin: 2em; font-size: small; color: gray;}
+      </style>
+      </head>
+      <body><h1>Test coverage for vnccollab.common.cache</h1>
+      <table>
+    
+<tr><td><a href="vnccollab.html">vnccollab/</a></td> <td style="background: yellow">&nbsp;&nbsp;&nbsp;&nbsp;</td> <td>covered 95% (12 of 287 uncovered)</td></tr>
+<tr><td><a href="vnccollab.common.html">&nbsp;&nbsp;&nbsp;&nbsp;common/</a></td> <td style="background: yellow">&nbsp;&nbsp;&nbsp;&nbsp;</td> <td>covered 95% (12 of 287 uncovered)</td></tr>
+<tr><td><a href="vnccollab.common.cache.html">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cache.py</a></td> <td style="background: green">&nbsp;&nbsp;&nbsp;&nbsp;</td> <td>covered 100% (0 of 26 uncovered)</td></tr>
+</table><hr/>
+<pre>    1: from time import time
+    1: from collections import defaultdict
+       
+       
+    2: class TimeCacheKey:
+           """Helper class for plone.memoize.ram.cache.
+       
+    1:     Memoizes a callable for a time period."""
+       
+    1:     def __init__(self, period, last_time=0):
+    2:         self.period = period
+    2:         self.last_time = defaultdict(int)
+       
+    1:     def __call__(self, method, *args, **kargs):
+    5:         nargs = list(args)
+    5:         nkargs = self._kargs_to_list(kargs)
+    5:         nargs.extend(nkargs)
+    5:         nargs = str(nargs)
+    5:         now = time()
+    5:         last_time = self.last_time[nargs]
+    5:         if now - last_time &gt; self.period:
+    5:             self.last_time[nargs] = now
+    5:             last_time = now
+       
+    5:         return nargs, last_time
+       
+    1:     def _kargs_to_list(self, kargs):
+    5:         lst = []
+   11:         for k, v in sorted(kargs.items()):
+    6:             if type(v) == list:
+    4:                 vv = ','.join(sorted(v))
+                   else:
+    2:                 vv = v
+    6:             lst.append((k, vv))
+    5:         return lst
+</pre>
+
+      <div class="footer">
+      Generated for revision Niewersjonowany katalog on 2014-03-19 18:17:18.052111Z
+      </div>
+    </body>
+    </html>

@@ -31,9 +31,9 @@ Keyword Search
 
 A keyword search is a special kind of search that takes place when a keyword
 suffixed by ``:`` is present in the search string. This package offers a 
-``search`` view with kwyword search.
+``search`` view with keyword search.
 
-Currently, there are two keyword defined:
+Currently, there are two keywords defined:
 
 - ``type:`` keyword: The search returns only object of the types specified
   in the query.

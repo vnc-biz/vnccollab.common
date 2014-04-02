@@ -1,8 +1,11 @@
 Changelog
 =========
 
-1.0.4 - Unreleased
-------------------
+1.0.4 - April 02, 2014
+----------------------
+
+- Add unit tests [10656].
+  [Marcin Staniszczak]
 
 - Adds README documentation.
   [Jose Dinuncio]
