@@ -27,4 +27,16 @@
           />
     </genericsetup:upgradeSteps>
 
+    <genericsetup:upgradeSteps
+      source="1101"
+      destination="1102"
+      sortkey="3"
+      profile="vnccollab.common:default">
+
+        <genericsetup:upgradeDepends
+          title="Fixes css order"
+          import_steps="cssregistry"
+          />
+    </genericsetup:upgradeSteps>
+
 </configure>

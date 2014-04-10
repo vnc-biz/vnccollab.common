@@ -1,6 +1,11 @@
 Changelog
 =========
 
+1.0.5 - Unreleased
+
+- Fixes cssregistry order. Upgrade step 1102 [10936].
+  [Cesar Gonzalez]
+
 1.0.4 - April 02, 2014
 ----------------------
 
