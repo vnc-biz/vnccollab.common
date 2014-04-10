@@ -3,6 +3,9 @@ Changelog
 
 1.0.5 - Unreleased
 
+- Force css override for dynatree [10936].
+  [Cesar Gonzalez]
+
 - Fixes cssregistry order. Upgrade step 1102 [10936].
   [Cesar Gonzalez]
 
