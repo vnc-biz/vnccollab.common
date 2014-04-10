@@ -3,6 +3,9 @@ Changelog
 
 1.0.5 - Unreleased
 
+- Adds common icon images [10960].
+  [Cesar Gonzalez]
+
 - Force css override for dynatree [10936].
   [Cesar Gonzalez]
 
