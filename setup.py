@@ -1,10 +1,10 @@
 from setuptools import setup, find_packages
 import os
 
-version = open('version.txt').read()
+version = open('version.txt').readline().strip()
 
 long_description = (
-    open(os.path.join("docs", "README.txt")).read()
+    open("README.txt").read()
     + '\n' +
     open(os.path.join("docs", "HISTORY.txt")).read()
     + '\n')

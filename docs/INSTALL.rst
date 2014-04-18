@@ -1,5 +1,5 @@
 vnccollab.common Installation
-----------------------------
+-----------------------------
 
 To install vnccollab.common into the global Python environment (or a workingenv),
 using a traditional Zope 2 instance, you can do this:
@@ -28,7 +28,7 @@ into your Zope instance.
 Alternatively, if you are using zc.buildout and the plone.recipe.zope2instance
 recipe to manage your project, you can do this:
 
-* Add ``vnccollab.common`` to the list of eggs to install, e.g.:
+* Add ``vnccollab.common`` to the list of eggs to install, e.g.: ::
 
     [buildout]
     ...
@@ -36,7 +36,7 @@ recipe to manage your project, you can do this:
         ...
         vnccollab.common
 
-* Tell the plone.recipe.zope2instance recipe to install a ZCML slug:
+* Tell the plone.recipe.zope2instance recipe to install a ZCML slug: ::
 
     [instance]
     recipe = plone.recipe.zope2instance
@@ -44,9 +44,10 @@ recipe to manage your project, you can do this:
     zcml =
         vnccollab.common
 
-* Re-run buildout, e.g. with:
+* Re-run buildout, e.g. with: ::
 
     $ ./bin/buildout
 
 You can skip the ZCML slug if you are going to explicitly include the package
 from another package's configure.zcml file.
+
