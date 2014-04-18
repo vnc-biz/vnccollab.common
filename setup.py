@@ -4,7 +4,7 @@ import os
 version = open('version.txt').readline().strip()
 
 long_description = (
-    open("README.txt").read()
+    open("README.rst").read()
     + '\n' +
     open(os.path.join("docs", "HISTORY.txt")).read()
     + '\n')
