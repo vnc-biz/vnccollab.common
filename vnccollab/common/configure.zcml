@@ -17,7 +17,7 @@
 
   <genericsetup:registerProfile
       name="default"
-      title="VNC Collaboration Common Rsources"
+      title="VNC Collaboration Common Resources"
       directory="profiles/default"
       description="Installs the vnccollab.common package"
       provides="Products.GenericSetup.interfaces.EXTENSION"
