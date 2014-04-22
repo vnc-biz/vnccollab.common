@@ -15,7 +15,7 @@ following features:
 TimeCacheKey
 ------------
 
-TimeCacheKey is a helper class to add volatile cache based on last time access. You can use it in the following way::
+TimeCacheKey is a helper class to add volatile cache based on last time access. You can use it in the following way: ::
 
     >>> from plone.memoize import ram
     >>> from vnccollab.common.cache import TimeCacheKey
@@ -37,14 +37,14 @@ Currently, there are two keywords defined:
 
 - ``type:`` keyword: The search returns only object of the types specified
   in the query.
-- ``user:```keyword: The search returns only objects created by the user
+- ``user:`` keyword: The search returns only objects created by the user
   specified in the query.
 
 Simple Vocabulary Factory
 -------------------------
 
 ``SimpleVocabularyFactory`` is a convenience class for the creation of 
-vocabularies based in a list of tuples::
+vocabularies based in a list of tuples: ::
 
     >>> from vnccollab.common.vocabularies import SimpleVocabularyFactory
     >>> semaphore = [('r', 'Red'), ('y', 'Yellow'), ('g', 'Green')]
