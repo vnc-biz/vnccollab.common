@@ -40,11 +40,4 @@ setup(name='vnccollab.common',
           'collective.js.jqueryui',
       ],
       extras_require={'test': ['plone.app.testing']},
-      entry_points="""
-      # -*- Entry points: -*-
-      [z3c.autoinclude.plugin]
-      target = plone
-      """,
-      #setup_requires=["PasteScript"],
-      #paster_plugins=["templer.localcommands"],
       )
