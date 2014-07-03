@@ -1,6 +1,16 @@
 Changelog
 =========
 
+1.0.6 - unreleased
+------------------
+
+- Adds portlet migration functions.
+  [JOse Dinuncio]
+
+- Cleans setup.py [11080].
+  [Jose Dinuncio]
+
+
 1.0.5 - April 11, 2014
 ----------------------
 

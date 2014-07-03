@@ -1,10 +1,10 @@
 from setuptools import setup, find_packages
 import os
 
-version = open('version.txt').read()
+version = open('version.txt').readline().strip()
 
 long_description = (
-    open("README.txt").read()
+    open("README.rst").read()
     + '\n' +
     open(os.path.join("docs", "HISTORY.txt")).read()
     + '\n')
@@ -26,7 +26,7 @@ setup(name='vnccollab.common',
       keywords='',
       author='Jose Dinuncio',
       author_email='jose.dinuncio@vnc.biz',
-      url='http://svn.plone.org/svn/collective/',
+      url='https://github.com/vnc-biz/vnccollab.common',
       license='gpl',
       packages=find_packages(exclude=['ez_setup']),
       namespace_packages=['vnccollab', ],
@@ -40,11 +40,4 @@ setup(name='vnccollab.common',
           'collective.js.jqueryui',
       ],
       extras_require={'test': ['plone.app.testing']},
-      entry_points="""
-      # -*- Entry points: -*-
-      [z3c.autoinclude.plugin]
-      target = plone
-      """,
-      #setup_requires=["PasteScript"],
-      #paster_plugins=["templer.localcommands"],
       )
