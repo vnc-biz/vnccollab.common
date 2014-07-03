@@ -6,7 +6,7 @@ version = open('version.txt').readline().strip()
 long_description = (
     open("README.rst").read()
     + '\n' +
-    open(os.path.join("docs", "HISTORY.txt")).read()
+    open(os.path.join("docs", "HISTORY.rst")).read()
     + '\n')
 
 setup(name='vnccollab.common',
